@@ -1,9 +1,18 @@
 * {
   box-sizing: border-box;
+  font-family: monospace;
 }
 
 body {
   margin: 0;
+}
+/* style logo */
+.logo {
+  background-color: #0B5345;
+  padding: 20px;
+  text-align: LEFT;
+  color: white;
+  font-size: 20px;
 }
 
 /* Style the header */
@@ -41,14 +50,14 @@ body {
   padding: 10px;
 }
 
-/* Left and right column */
-.column.side {
-  width: 25%;
+/* Left column */
+.column.left {
+  width: 66.6%;
 }
 
-/* Middle column */
-.column.middle {
-  width: 50%;
+/* right column */
+.column.right {
+  width: 33.3%;
 }
 
 /* Clear floats after the columns */

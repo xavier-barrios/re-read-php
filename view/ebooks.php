@@ -22,7 +22,7 @@
   
   <div class="column left">
     <div class="topnav">
-      <a href="../index..php">Re-Read</a>
+      <a href="../index.php">Re-Read</a>
       <a href="libros.php">Libros</a>
       <a href="ebooks.php">eBooks</a>
     </div>

@@ -4,15 +4,15 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "db_reread";
+$db = "bd_read";
 
 // Crear la conexion
 $conn = mysqli_connect($host, $user, $pass, $db);
 
 // Checkear la conexion
 if (!$conn){
-    echo "Error: No se pudo conectar a MySQL.".PHP_EQL;
-    echo "Error de depuracion: " mysqli_connect_errno() . PHP_EQL;
+    echo "Error: No se pudo conectar a MySQL." . PHP_EQL;
+    echo "Error de depuracion: " .mysqli_connect_errno() . PHP_EOL;
     exit;
 } else{
     mysqli_set_charset($conn, "utf8");

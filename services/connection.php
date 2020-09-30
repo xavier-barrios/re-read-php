@@ -4,17 +4,30 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "bd_read";
+$db = "reread";
 
-// Crear la conexion
+// Crear la conexión
 $conn = mysqli_connect($host, $user, $pass, $db);
 
-// Checkear la conexion
-if (!$conn){
-    echo "Error: No se pudo conectar a MySQL." . PHP_EQL;
-    echo "Error de depuracion: " .mysqli_connect_errno() . PHP_EOL;
+// Checkear la conexión
+if (!$conn) {
+    echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
+    echo "Error de depuración: " . mysqli_connect_errno() . PHP_EOL;
     exit;
-} else{
-    mysqli_set_charset($conn, "utf8");
-    }
+} else {
+	mysqli_set_charset($conn, "utf8");
+}
+
+/* //ESTILO ORIENTADO A OBJETOS
+// Crear la conexión
+$conn = new mysqli('localhost', 'root', '', 'imagenes');
+
+// Checkear la conexión
+if ($conn->connect_errno) {
+	die("Error: No se pudo conectar a MySQL: " . $conn->connect_errno);
+} else {
+	$conn->set_charset("utf8");
+}
+*/
+
 ?>

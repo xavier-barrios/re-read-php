@@ -1,5 +1,3 @@
-create database `bd_read`;
-	use `bd_read`;
 -- phpMyAdmin SQL Dump
 -- version 5.0.2
 -- https://www.phpmyadmin.net/

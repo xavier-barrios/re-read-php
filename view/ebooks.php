@@ -25,6 +25,31 @@
     </div>
     <div class="textpage">
       <h3>Toda la actualidad en eBook</h3>
+      <!-- Nuevo desarrllo: formulario para filtrar autor -->
+    <div>
+      <form action="./ebooks.php" method="POST">
+        <label for="fautor">Autor</label>
+        <input type="text" id="fautor" name="fautor" placeholder="Itroduce el autor...">
+
+        <!-- <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+        <label for="country">Country</label>
+        <select id="country" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select> -->
+      
+        <input type="submit" value="Buscar">
+      </form>
+    </div>
+    <?php
+    if(isset($_POST['faotor'])){
+      // filtrara los eboocks que se mostraran en la página
+    }else {
+      // mostrara todos los eboocks de la BD
+    }
+    ?>
       <!--
       <div class="gallery">
         <img src="../img/cell.jpeg" alt="Cell">

@@ -25,39 +25,70 @@
     </div>
     <div class="textpage">
       <h3>Toda la actualidad en eBook</h3>
+      <!-- Nuevo desarrllo: formulario para filtrar autor -->
+    <div class="form">
+      <form action="./ebooks.php" method="POST">
+        <label for="fautor">Autor</label>
+        <input type="text" id="fautor" name="fautor" placeholder="Itroduce el autor...">
+
+        <!-- <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">-->
+        <label for="country">País</label>
+        <select id="country" name="country">
+          <option value="%">Todos los paises</option>
+          <?php
+          include '../services/connection.php';
+          $query="SELECT DISTINCT Authors.Country FROM Authors ORDER BY Country";
+          $result=mysqli_query($conn, $query);
+          while($row=mysqli_fetch_array($result)){
+            echo '<option value="'.$row['Country'].'">'.$row['Country'].'</option>';
+          }
+          ?>
+        </select> 
+      
+        <input type="submit" value="Buscar">
+      </form>
+    </div>
+    <?php
+    if(isset($_POST['fautor'])){
+      // filtrara los eboocks que se mostraran en la página
+      $query="SELECT Books.Description, Books.img, Books.Title 
+      FROM Books INNER JOIN BooksAuthors ON Id=BooksAuthors.BookId 
+      INNER JOIN Authors ON Authors.Id = BooksAuthors.AuthorId
+      WHERE Authors.Name LIKE '%{$_POST['fautor']}%'
+      AND Authors.Country LIKE '%{$_POST['country']}%'";
+      // echo $query;
+      $result = mysqli_query($conn, $query);
+    }else {
+      $result = mysqli_query($conn, "SELECT Books.Description, Books.img, Books.Title FROM Books WHERE eBook != '0'");
+    }
+    if (!empty($result) && mysqli_num_rows($result) > 0) {
+      // datos de salida de cada fila	(fila = row)
+        $i=0;
+      while ($row = mysqli_fetch_array($result)) {
+        $i++;
+        echo "<div class='gallery'>";
+        // Añadimos la imagen a la página con la etiqueta img de HTML
+        echo "<img src=../img/".$row['img']." alt='".$row['Title']."'>";
+        // ---- Evolutivo:
+        echo "<div class='desc'>".$row['Description']." </div>";
+        // ---- Fin del evolutivo
+        echo "</div>";
+        if ($i%3=='0') {
+          echo "<div style='clear:both;'></div>";
+        }
+      }
+      } else {
+        echo "0 resultados";
+      }
+    ?>
       <!--
       <div class="gallery">
         <img src="../img/cell.jpeg" alt="Cell">
         <div class="desc">A través de los teléfonos móviles se envía un mensaje que convierte a todos en esclavos asesinos...</div>
       </div>
       -->
-      <?php
-      // 1. Conexión con la base de datos	
-      include '../services/connection.php';
-
-      // 2. Selección y muestra de datos de la base de datos
-      $result = mysqli_query($conn, "SELECT Books.Description, Books.img, Books.Title FROM Books WHERE eBook != '0'");
-
-      if (!empty($result) && mysqli_num_rows($result) > 0) {
-      // datos de salida de cada fila	(fila = row)
-        $i=0;
-        while ($row = mysqli_fetch_array($result)) {
-          $i++;
-          echo "<div class='gallery'>";
-          // Añadimos la imagen a la página con la etiqueta img de HTML
-          echo "<img src=../img/".$row['img']." alt='".$row['Title']."'>";
-          // ---- Evolutivo:
-          echo "<div class='desc'>".$row['Description']." </div>";
-          // ---- Fin del evolutivo
-          echo "</div>";
-          if ($i%3=='0') {
-            echo "<div style='clear:both;'></div>";
-          }
-        }
-      } else {
-        echo "0 resultados";
-      }
-      ?>
+     
     </div>
   </div>
   <div class="column side">
